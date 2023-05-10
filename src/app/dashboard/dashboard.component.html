@@ -1,0 +1,7 @@
+<h2>Top Services</h2>
+<div class="services-menu">
+    <a *ngFor="let service of services"
+    routerLink="/detail/{{service.rate}}">
+    {{service.name}}
+  </a>
+</div>

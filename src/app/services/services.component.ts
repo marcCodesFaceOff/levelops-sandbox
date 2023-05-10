@@ -12,19 +12,12 @@ import { RateService } from '../rate-service.service';
 
 export class ServicesComponent implements OnInit{
 
-  selectedService?: Service;
-
   services: Service[] = [];
 
   constructor(private serviceService:ServiceService, private rateService: RateService) {};
 
   ngOnInit(): void {
     this.getServices();
-  }
-
-  onSelect(service: Service): void {
-    this.selectedService = service;
-    this.rateService.add(`ServicesComponent: Selected Service Id=${service.name}`);
   }
 
   getServices(): void {

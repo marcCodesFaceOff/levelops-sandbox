@@ -7,13 +7,15 @@ import { ServicesComponent } from './services/services.component';
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
 import { RatesComponent } from './rates/rates.component';
 import { AppRoutingModule } from './app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ServicesComponent,
     ServiceDetailComponent,
-    RatesComponent
+    RatesComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

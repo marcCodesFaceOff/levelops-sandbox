@@ -1,10 +1,10 @@
-<div *ngIf="services">
+<div *ngIf="service">
 
-    <h2>{{services.name | uppercase}} DETAILS</h2>
-    <div><span>RATE: $</span>{{services.rate}}</div>
+    <h2>{{service.name | uppercase}} DETAILS</h2>
+    <div><span>RATE: $</span>{{service.rate}}</div>
     <div>
       <label for="services-name">SERVICE: </label>
-      <input id="services-name" [(ngModel)]="services.name" placeholder="name">
+      <input id="services-name" [(ngModel)]="service.name" placeholder="name">
     </div>
   
   </div>
