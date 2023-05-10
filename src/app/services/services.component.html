@@ -2,7 +2,7 @@
 <ul class="services">
   <li *ngFor="let service of services">
     <button [class.selected]="service === selectedService" type="button" (click)="onSelect(service)">
-      <span class="badge">INFO</span>
+      <span class="badge">i</span>
       <span class="name">{{service.name}}</span>
     </button>
   </li>
