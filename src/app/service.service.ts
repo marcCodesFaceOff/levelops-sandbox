@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
-import { SERVICES } from './services/mock-services'; 
+
+import { Observable, of } from 'rxjs';
+
 import { Service } from './services/service';
+import { SERVICES } from './services/mock-services';
+import { RateService } from './rate-service.service'; 
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ServiceService {
-  services: string[] = [];
 
-  add(service: string) {
-    this.services.push(service);
-  }
+  constructor(private rateService: RateService) { }
 
-  clear() {
-    this.services = [];
-  }
-
-  getServices(): Service[] {
-    return SERVICES;
+  getServices(): Observable<Service[]> {
+    const services = of(SERVICES);
+    this.rateService.add('Service: fetched ');
+    return services;
   }
 }

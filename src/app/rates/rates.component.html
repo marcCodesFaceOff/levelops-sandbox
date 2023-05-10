@@ -1,1 +1,8 @@
-<p>rates works!</p>
+<div *ngIf="rateService.rate.length">
+
+    <h2>RATES</h2>
+    <button type="button" class="clear"
+            (click)="rateService.clear()">CLEAR RATES</button>
+    <div *ngFor='let rate of rateService.rate'> {{rate}} </div>
+  
+  </div>

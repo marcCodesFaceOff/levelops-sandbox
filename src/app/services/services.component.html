@@ -2,17 +2,10 @@
 <ul class="services">
   <li *ngFor="let service of services">
     <button [class.selected]="service === selectedService" type="button" (click)="onSelect(service)">
-      <span class="badge">-</span>
+      <span class="badge">INFO</span>
       <span class="name">{{service.name}}</span>
     </button>
   </li>
 </ul>
 
-<div *ngIf="selectedService">
-  <h2>{{selectedService.name | uppercase}} DETAILS</h2>
-  <div>rate: ${{selectedService.rate}}/Hr</div>
-  <div>
-    <label for="service-name">Service: </label>
-    <input rate="service-name" [(ngModel)]="selectedService.name" placeholder="name">
-  </div>
-</div>
+<app-service-detail [services]="selectedService"></app-service-detail>
