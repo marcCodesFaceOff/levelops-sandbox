@@ -10,7 +10,7 @@ const routes: Routes = [
 // component:	The component that the router should create when navigating to this route.
   { path: 'services', component: ServicesComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'detail/:id', component: ServiceDetailComponent },
+  { path: 'detail/:rate', component: ServiceDetailComponent },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
 ];
 

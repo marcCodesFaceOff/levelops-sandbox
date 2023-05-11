@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { Service } from './service'
 import { ServiceService } from '../service.service';
-import { RateService } from '../rate-service.service';
 
 @Component({
   selector: 'app-services',
@@ -14,7 +13,7 @@ export class ServicesComponent implements OnInit{
 
   services: Service[] = [];
 
-  constructor(private serviceService:ServiceService, private rateService: RateService) {};
+  constructor(private serviceService:ServiceService) {};
 
   ngOnInit(): void {
     this.getServices();
