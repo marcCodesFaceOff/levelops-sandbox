@@ -1,0 +1,9 @@
+<h2>LevelOps IT Services</h2>
+<ul class="services">
+  <li *ngFor="let service of services">
+    <a routerLink="/detail/{{service.rate}}">
+      <span class="badge">${{service.rate}}</span> {{service.name}}
+    </a>
+  </li>
+</ul>
+
