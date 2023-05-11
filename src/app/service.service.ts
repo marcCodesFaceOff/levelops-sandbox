@@ -18,8 +18,6 @@ export class ServiceService {
   }
 
   getService(rate: number): Observable<Service> {
-    // For now, assume that a hero with the specified `id` always exists.
-    // Error handling will be added in the next step of the tutorial.
     const service = SERVICES.find(service => service.rate === rate)!;
     this.rateService.add(`RateService: fetched service rate=$${rate}`);
     return of(service);
