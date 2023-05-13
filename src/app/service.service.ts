@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-
+import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Service } from './services/service';
 import { SERVICES } from './services/mock-services';
 import { RateService } from './rate-service.service'; 
@@ -9,17 +9,65 @@ import { RateService } from './rate-service.service';
 @Injectable({providedIn: 'root'})
 export class ServiceService {
 
-  constructor(private rateService: RateService) { }
+  private servicesUrl = 'api/services';  // URL to web api
 
+  constructor(
+    private http: HttpClient,
+    private rateService: RateService) { }
+
+  /** GET services from the server */
   getServices(): Observable<Service[]> {
-    const services = of(SERVICES);
-    this.rateService.add('Service: fetched ');
-    return services;
+    return this.http.get<Service[]>(this.servicesUrl)
+    .pipe(
+      tap(_ => this.log('fetched services')),
+            catchError(this.handleError<Service[]>('getServices', []))
+    );
   }
 
+  /** GET service by rate. Will 404 if rate not found */
   getService(rate: number): Observable<Service> {
-    const service = SERVICES.find(service => service.rate === rate)!;
-    this.rateService.add(`RateService: fetched service rate=$${rate}`);
-    return of(service);
+    const url = `${this.servicesUrl}/${rate}`;
+    return this.http.get<Service>(url).pipe(
+      tap(_ => this.log(`fetched service rate=${rate}`)),
+      catchError(this.handleError<Service>(`getService rate=${rate}`)));
+  }
+
+  /** Log a ServiceService message with the MessageService */
+  private log(message: string) {
+    this.rateService.add(`Service: ${message}`);
+  }
+
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   *
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
+  /* GET Services whose name contains search term */
+  searchServices(term: string): Observable<Service[]> {
+    if (!term.trim()) {
+      // if not search term, return empty Service array.
+      return of([]);
+    }
+    return this.http.get<Service[]>(`${this.servicesUrl}/?name=${term}`).pipe(
+      tap(x => x.length ?
+        this.log(`found Services matching "${term}"`) :
+        this.log(`no Services matching "${term}"`)),
+      catchError(this.handleError<Service[]>('searchServices', [])));
   }
 }

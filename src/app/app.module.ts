@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ServicesComponent } from './services/services.component';
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
 import { RatesComponent } from './rates/rates.component';
+import { ServiceSearchComponent } from './service-search/service-search.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { RatesComponent } from './rates/rates.component';
     ServicesComponent,
     ServiceDetailComponent,
     RatesComponent,
-    DashboardComponent
+    DashboardComponent,
+    ServiceSearchComponent
   ],
   bootstrap: [AppComponent]
 })
