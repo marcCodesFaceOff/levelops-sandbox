@@ -8,10 +8,10 @@ import { ServiceDetailComponent } from './service-detail/service-detail.componen
 const routes: Routes = [
 // path:	A string that matches the URL in the browser address bar.
 // component:	The component that the router should create when navigating to this route.
-  { path: 'services', component: ServicesComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'detail/:rate', component: ServiceDetailComponent },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+    { path: 'services', component: ServicesComponent },
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'detail/:rate', component: ServiceDetailComponent },
 ];
 
 @NgModule({

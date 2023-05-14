@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -10,7 +11,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ServicesComponent } from './services/services.component';
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
-import { RatesComponent } from './rates/rates.component';
+import { RatesComponent } from './rates/messages.component';
 import { ServiceSearchComponent } from './service-search/service-search.component';
 
 
@@ -19,7 +20,6 @@ import { ServiceSearchComponent } from './service-search/service-search.componen
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule,
     HttpClientModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.

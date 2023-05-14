@@ -8,14 +8,14 @@ import { Service } from './services/service';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const services = [
-      { rate: 45, name: 'POS Installations' },
-      { rate: 50, name: 'Laptop Break/Fix' },
-      { rate: 55, name: 'Desktop Support' },
-      { rate: 60, name: 'Google Home Installations' },
-      { rate: 65, name: 'Network Troubleshooting' },
-      { rate: 70, name: 'Wordpress Development'},
-      { rate: 75, name: 'Data Center - Hands Onsite' },
-      { rate: 80, name: 'Web Application Development' },
+      { id: 1, rate: 45, name: 'POS Installations', desc: 'if you have an installation that requires installation across multiple locations or more sophisticated networking requirements we can help.' },
+      { id: 2, rate: 50, name: 'Laptop Break/Fix' },
+      { id: 3, rate: 55, name: 'Desktop Support' },
+      { id: 4, rate: 60, name: 'Google Home Installations' },
+      { id: 5, rate: 65, name: 'Network Troubleshooting' },
+      { id: 6, rate: 70, name: 'Wordpress Development'},
+      { id: 7, rate: 75, name: 'Data Center - Hands Onsite' },
+      { id: 8, rate: 80, name: 'Web Development' },
     ];
     return {services};
   }

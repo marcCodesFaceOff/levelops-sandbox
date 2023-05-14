@@ -1,40 +1,41 @@
 import { Injectable } from '@angular/core';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Service } from './services/service';
-import { SERVICES } from './services/mock-services';
-import { RateService } from './rate-service.service'; 
+import { MessageService } from './message.service'; 
 
 @Injectable({providedIn: 'root'})
 export class ServiceService {
 
   private servicesUrl = 'api/services';  // URL to web api
 
-  constructor(
-    private http: HttpClient,
-    private rateService: RateService) { }
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  
+  constructor(private http: HttpClient, private messageService: MessageService) { }
 
-  /** GET services from the server */
-  getServices(): Observable<Service[]> {
-    return this.http.get<Service[]>(this.servicesUrl)
-    .pipe(
-      tap(_ => this.log('fetched services')),
-            catchError(this.handleError<Service[]>('getServices', []))
-    );
+    /** GET services from the server */
+    getServices(): Observable<Service[]> {
+      return this.http.get<Service[]>(this.servicesUrl)
+      .pipe(
+        tap(_ => console.log('fetched services')),
+              catchError(this.handleError<Service[]>('getServices', [])));
+    }
+
+    /** GET service by rate. Will 404 if rate not found */
+    getService(rate: number): Observable<Service> {
+      const url = `${this.servicesUrl}/${rate}`;
+      return this.http.get<Service>(url)
+        .pipe(
+          tap(_ => console.log(`fetched service rate = $${rate}`)),
+          catchError(this.handleError<Service>(`getService rate=$${rate}`)));
   }
 
-  /** GET service by rate. Will 404 if rate not found */
-  getService(rate: number): Observable<Service> {
-    const url = `${this.servicesUrl}/${rate}`;
-    return this.http.get<Service>(url).pipe(
-      tap(_ => this.log(`fetched service rate=${rate}`)),
-      catchError(this.handleError<Service>(`getService rate=${rate}`)));
-  }
-
-  /** Log a ServiceService message with the MessageService */
+    /** Log a ServiceService message with the MessageService */
   private log(message: string) {
-    this.rateService.add(`Service: ${message}`);
+    this.messageService.add(`Service: ${message}`);
   }
 
   /**
@@ -46,13 +47,10 @@ export class ServiceService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
-
       // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
-
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };

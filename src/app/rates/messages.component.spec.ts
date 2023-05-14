@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RatesComponent } from './rates.component';
+import { RatesComponent } from './messages.component';
 
 describe('RatesComponent', () => {
   let component: RatesComponent;
